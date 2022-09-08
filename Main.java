@@ -75,10 +75,14 @@ public class Main {
     private static void partidasEntre2010E2015(Path path) throws IOException {
         Stream<String> stream;
         stream = Files.lines(path);
-
-        System.out.println("De 2010 à 2015 foram realizadas " + stream + " partidas");
+        int soma = (int) stream
+                .skip(1)
+                .map(table -> mapToTabela(table))
+                .filter(table -> table.getData().getYear() >= 2010)
+                .filter(table -> table.getData().getYear() <= 2015)
+                .count();
+        System.out.println("De 2010 à 2015 foram realizadas " + soma + " partidas");
     }
-
     //Exercício 4 - Qual o jogo que teve mais gols no campeonato?
 
     //Exercício 5 - Qual o time que fez mais gols?
